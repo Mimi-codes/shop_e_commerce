@@ -3,7 +3,7 @@ import './App.css';
 //to avoid clumsy code imports, simply use a named component as below
 //but you have to create an index.js file, and export default as (e.g export { default as Navbar } from './Navbar/Navbar';)
 import { commerce } from './lib/commerce';
-import { Products, Navbar, Cart} from './components';
+import { Products, Navbar, Cart, Checkout} from './components';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import React from 'react';
@@ -72,7 +72,7 @@ fetchCart();
       </Route>
 
       <Route exact path='/checkout'>
-
+<Checkout />
       </Route>
     </Switch>
     </div>
