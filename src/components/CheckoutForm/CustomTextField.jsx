@@ -3,7 +3,7 @@ import { TextField, Grid } from '@material-ui/core';
 import { useFormContext, Controller } from 'react-hook-form';
 
 //this component is to connect material-ui with react-hook-form
-const FormInput = ({ name, label, required }) => {
+const FormInput = ({ name, label }) => {
     const { control } = useFormContext();
 
   
