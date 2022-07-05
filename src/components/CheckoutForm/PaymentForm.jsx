@@ -9,7 +9,7 @@ const stripePromise = loadStripe(process.env.REACT_STRIPE_PUBLIC_KEY);
 
 
 
-const PaymentForm = ({ checkOutToken, backStep, onCaptureCheckout, nextStep }) => {
+const PaymentForm = ({ checkOutToken, backStep, onCaptureCheckout, nextStep, timeout}) => {
   const handleSubmit = async (event, elements, stripe) => {
 event.preventDefault();
 
@@ -49,6 +49,9 @@ if(error) {
   }
 
 onCaptureCheckout(checkoutToken.id, orderData);
+
+timeout()
+
 nextStep();
 }
   }
@@ -65,7 +68,7 @@ nextStep();
     <Elements stripe={stripePromise}>
       <ElementsConsumer>
         {({ elements, stripe }) => (
-<form onSubmit={(e) => hendleSubmit(e, elements, stripe)}>
+<form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
   <CardElement />
   <br /> <br />
   <div style={{display: 'flex', justifyContent: 'space-between'}}>
