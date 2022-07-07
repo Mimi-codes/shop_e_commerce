@@ -24,9 +24,9 @@ if(error) {
 } else {
   const orderData =  {
     line_items: checkoutToken.live.line_items,
-    customers: { 
-      firstname: shippingData.firstname, 
-      lastname: shippingData.lastname,
+    customer: { 
+      firstname: shippingData.firstName, 
+      lastname: shippingData.lastName,
     email: shippingData.email
     },
     shipping: {
