@@ -9,7 +9,7 @@ const stripePromise = loadStripe(process.env.REACT_STRIPE_PUBLIC_KEY);
 
 
 
-const PaymentForm = ({ checkOutToken, backStep, onCaptureCheckout, nextStep, timeout}) => {
+const PaymentForm = ({ checkoutToken, backStep, shippingData, onCaptureCheckout, nextStep, timeout}) => {
   const handleSubmit = async (event, elements, stripe) => {
 event.preventDefault();
 
@@ -23,7 +23,7 @@ if(error) {
   console.log(error);
 } else {
   const orderData =  {
-    line_items: checkOutToken.live.line_items,
+    line_items: checkoutToken.live.line_items,
     customers: { 
       firstname: shippingData.firstname, 
       lastname: shippingData.lastname,
@@ -54,15 +54,15 @@ timeout()
 
 nextStep();
 }
-  }
-  
-  const totalAmount = commerce.checkout.getLive(checkOutToken);
+     
+  // const live = commerce.checkout.getLive(checkoutToken);
   // console.log(totalAmount.subtotal.formatted_with_symbol, 'mimi');
-
+ 
   // console.log(checkOutToken, 'baba oyo');
+  // commerce.checkout.getLive('gway_QlW0RpxRGXEqwn')
   return (
     <>
-    <Review checkOutToken={checkOutToken} />
+    <Review checkoutToken={checkoutToken} />
     <Divider />
     <Typography variant='h6' gutterBottom styles={{margin: '20px 0'}}>Payment method</Typography>
     <Elements stripe={stripePromise}>
@@ -73,10 +73,10 @@ nextStep();
   <br /> <br />
   <div style={{display: 'flex', justifyContent: 'space-between'}}>
     <Button variant='outlined' onClick={backStep}>Back</Button>
-    <Button type='submit' variant='contained' disables={!stripe} color='primary'>
-      Pay { checkOutToken.live.subtotal.formatted_with_symbol };
-     
-    </Button>
+    <Button type="submit" variant="contained" disabled={!stripe} color="primary">
+                Pay {checkoutToken.live.subtotal.formatted_with_symbol}
+                {/* Pay {live.checkoutToken.subtotal.formatted_with_symbol} */}
+              </Button>
   </div>
 </form>
         )}
@@ -85,5 +85,5 @@ nextStep();
     </>
   )
 }
-
+}
 export default PaymentForm; //rendered in Checkout.jsx
